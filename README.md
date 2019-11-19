@@ -117,7 +117,7 @@ AST Proposal
 
 To give some assurances that this AST works well, it should be demonstrated that many template languages fit into the paradigm.
 
-#### Handlebars Support
+#### [Handlebars](https://handlebarsjs.com/) Support
 - __[templast-hbs-parse](#)__
   parse handlebars templates into `templast`
 - __[templast-hbs-verify](#)__
@@ -125,13 +125,13 @@ To give some assurances that this AST works well, it should be demonstrated that
 - __[templast-hbs-stringify](#)__
   render the tree to a handlebars template
 
-#### mustache Support
+#### [mustache](https://mustache.github.io/mustache.5.html) Support
 - __[templast-mustache-parse](#)__
 - __[templast-mustache-verify](#)__
   assigns `warnings` or `failures` to the template if the source file was from some other template system and is now going to be rendered as a mustache file.
 - __[templast-mustache-stringify](#)__
 
-### doT Support
+### [doT](http://olado.github.io/doT/) Support
 - __[templast-doT-parse](#)__
   incorporate doT templates into `templast`
 - __[templast-doT-verify](#)__
@@ -139,7 +139,7 @@ To give some assurances that this AST works well, it should be demonstrated that
 - __[templast-doT-stringify](#)__
   incorporate doT templates into `templast`
 
-#### apacheVTL Support
+#### [apacheVTL](http://velocity.apache.org/engine/2.0/user-guide.html) Support
 - __[templast-apacheVTL-parse](#)__
   incorporate apacheVTL templates into `templast`
 - __[templast-apacheVTL-verify](#)__
@@ -147,48 +147,24 @@ To give some assurances that this AST works well, it should be demonstrated that
 - __[templast-apacheVTL-stringify](#)__
   incorporate apacheVTL templates into `templast`
 
-### js Tempalte Literals
-- __[templast-jsTemplateLiterals-parse](#)__
-  incorporate jsTemplateLiterals into `templast`
-- __[templast-verify-jsTemplateLiterals](#)__
-  incorporate jsTemplateLiterals into `templast`
-- __[templast-jsTemplateLiterals-stringify](#)__
-  incorporate js Template Literals into `templast` where they are rendered like: 
+### [js Tempalte Literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) Support
+- __[templast-jsTemplateLiterals-parse](#)__ incorporate js Template Literals into `templast`
+- __[templast-verify-jsTemplateLiterals](#)__ incorporate jsTemplateLiterals into `templast`
+- __[templast-jsTemplateLiterals-stringify](#)__ incorporate js Template Literals into `templast` 
+
+js template literals are stringified as a function that receives input data and pumps them into a string that mixes in the data. SUPER NICE because it is a least common demoninator, for just looking at the markup, for any server side rendering environment, 
   
-  ```js
-  const t = (data)=>`some text ${data.attr} with more static content`
-  ```
-
-
-#### EJS Support
-- __[templast-ejs-parse](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-verify](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-stringify](#)__
-  incorporate apacheVTL templates into `templast`
-
-#### EJS Support
-- __[templast-ejs-parse](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-verify](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-stringify](#)__
-  incorporate apacheVTL templates into `templast`
-
-
-#### JADE Support
-- __[templast-ejs-parse](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-verify](#)__
-  incorporate apacheVTL templates into `templast`
-- __[templast-ejs-stringify](#)__
-  incorporate apacheVTL templates into `templast`
+```js
+const t = (data)=>`some text ${data.attr} with more static content`
+```
 
 #### virtual DOM support
+- from the js template literals - you could transpile the template as a function rendering a virutal-DOM assuming the surrounding context is `hast` compatible. 
 - attempt to render a templast into a mixture of `hast` nodes and `templast` nodes such that you might be able to represent a template as:
 - this would let you compose your template in handlebars,etc, and then transpile your tempalte to a virtual dom function via an ℎ ƒunction.
 - configure the `virtual-dom-strigify` with the fucntion token to use: _default is 'h'_ but could easily be `preact.h` or `React.createElement`
+- conceptually a partial in this context is merely an in-scope function name used to take over rendering for part of a subtree.
+- at which point it seems like you have a superset of MDX?
 
 ```mjs
 /** @jsx Preact.h */
@@ -201,6 +177,24 @@ const t = (data) => h('div',attrs.div, [
                         h('input','button',data.buttonText)
                     ])
 ```
+
+#### EJS Support
+- __[templast-ejs-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+#### JADE Support
+- __[templast-ejs-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+
 
 ## Roadmap
 
@@ -225,7 +219,7 @@ Then use the `npx meta` command to manage all those sub-repos in some type of `l
   - Parse VTL to unist
   - Parse mustache to unist
   - Parse mustache to unist
-  - VTL to mustache ?? https://mustache.github.io/mustache.5.html?
+  - VTL to mustache ?? ?
     + hash lookups
     + hash context windows - and subsequent attribute lookups
     + comments
