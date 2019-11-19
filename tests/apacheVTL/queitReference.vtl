@@ -1,0 +1,19 @@
+# Quiet Reference Notation
+
+When Velocity encounters an undefined reference, its normal behavior is to output the image of the reference. 
+For example, suppose the following reference appears as part of a VTL template.
+
+        <input type="text" name="email" value="$email"/>
+
+When the form initially loads, the variable reference $email has no value, 
+but you prefer a blank text field to one with a value of "$email". 
+Using the quiet reference notation circumvents Velocity's normal behavior; 
+instead of using $email in the VTL you would use $!email. 
+So the above example would look like the following:
+
+        <input type="text" name="email" value="$!email"/>
+
+Now when the form is initially loaded and $email still has no value, an empty string will be output instead of "$email".
+Formal and quiet reference notation can be used together, as demonstrated below.
+
+        <input type="text" name="email" value="$!{email}"/>

@@ -1,0 +1,26 @@
+Formal Reference Notation
+
+Shorthand notation for references was used for the examples listed above, 
+but there is also a formal notation for references, which is demonstrated below:
+
+        ${mudSlinger}
+        ${customer.Address}
+        ${purchase.getTotal()}
+
+In almost all cases you will use the shorthand notation for references, but in some cases the formal notation is required for correct processing.
+
+Suppose you were constructing a sentence on the fly where $vice was to be used as the base word in the noun of a sentence. 
+The goal is to allow someone to choose the base word and produce one of the two following results: 
+"Jack is a pyromaniac." or "Jack is a kleptomaniac.". 
+Using the shorthand notation would be inadequate for this task. 
+Consider the following example:
+
+        Jack is a $vicemaniac.
+
+There is ambiguity here, and Velocity assumes that $vicemaniac, not $vice, is the Identifier that you mean to use. 
+Finding no value for $vicemaniac, it will return $vicemaniac. Using formal notation can resolve this problem.
+
+        Jack is a ${vice}maniac.
+
+Now Velocity knows that $vice, not $vicemaniac, is the reference. 
+Formal notation is often useful when references are directly adjacent to text in a template.

@@ -1,0 +1,19 @@
+        $foo[0]       ## $foo takes in an Integer look up
+        $foo[$i]      ## Using another reference as the index   
+        $foo["bar"]   ## Passing a string where $foo may be a Map
+
+The bracketed syntax also works with Java arrays since Velocity wraps arrays 
+in an access object that provides a get(Integer) method which returns the specified element.
+The bracketed syntax is valid anywhere .get is valid, for example:
+
+        $foo.bar[1].junk
+        $foo.callMethod()[1]
+        $foo["apple"][4]
+
+A reference can also be set using index notation, for example:
+
+        #set($foo[0] = 1)
+        #set($foo.bar[1] = 3)
+        #set($map["apple"] = "orange")
+
+The specified element is set with the given value. Velocity tries first the 'set' method on the element, then 'put' to make the assignment.

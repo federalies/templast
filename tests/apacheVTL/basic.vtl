@@ -1,0 +1,16 @@
+<html>
+  <body>
+    Hello $customer.Name!
+    <table>
+    #foreach( $mud in $mudsOnSpecial )
+      #if ( $customer.hasPurchased($mud) )
+        <tr>
+          <td>
+            $flogger.getPromo( $mud )
+          </td>
+        </tr>
+      #end
+    #end
+    </table>
+  </body>
+</html>

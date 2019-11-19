@@ -1,0 +1,17 @@
+As was mentioned earlier, properties often refer to methods of the parent object. 
+Velocity is quite clever when figuring out which method corresponds to a requested property. 
+It tries out different alternatives based on several established naming conventions. 
+The exact lookup sequence depends on whether or not the property name starts with an upper-case letter. 
+For lower-case names, such as $customer.address, the sequence is
+
+    getaddress()
+    getAddress()
+    get("address")
+    isAddress()
+
+For upper-case property names like $customer.Address, it is slightly different:
+
+    getAddress()
+    getaddress()
+    get("Address")
+    isAddress()
