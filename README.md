@@ -1,7 +1,62 @@
-# templateAST (aka: tASTy )
-a unist compliant syntax tree spec for templating languages
+![templast logo](./artwork/logo.svg)
 
-## Let's have a little Tasty, shall we?
+**T**emplate **A**bstract **S**yntax **T**ree (aka: templast )
+> a unist compliant syntax tree spec for templating languages
+
+## Why
+
+Because there are plenty of "components" and views that are really nice but only available in some other template engine. It would be nice to make a bridge to common ground such that the template langauge could be ported to templast which would unlock a world of templates, view, components such that I am not limited to my epression types based on some historical choice of template language I learned.
+  
+## Install
+
+```npm i @federa/templast @federa/templast-cli -D```
+
+## Usage
+
+pipe it in 
+```sh
+$> cat someTemplate.hbs | npx templastCLI -c config.js > someTemplate.apacheVTL
+```
+
+use the command line args
+```sh
+$> npx templastCLI -c config.js -i someTemplate.hbs -o someTemplate.apacheVTL
+```
+
+redirect a file in
+```sh
+$> npx templastCLI -c config.js < someTemplate.hbs > someTemplate.apacheVTL
+```
+
+use the lib/module in with es modules
+```mjs
+import templast from '@federa/templast'
+import hbsParse from '@federa/handlebars-parse'
+import vtlStringify from '@federa/vtl-stringify'
+import vfile from 'to-vfile'
+
+templast()
+  .use(hbsParse)
+  .use(vtlStringify)
+  .process(vfile('./myexmaple.hbs')) // or change it to a real handlebars example
+
+```
+
+use the lib/module in within node
+```js
+const vfile = require('to-vfile')  
+const templast = require('@federa/templast') 
+const hbsParse = require('@federa/handlebars-parse') 
+const vtlStringify = require('@federa/vtl-stringify')
+
+templast()
+  .use(hbsParse)
+  .use(vtlStringify)
+  .process(vfile('./myexmaple.hbs')) // or change it to a real handlebars example
+
+```
+
+## Wait What?
 
 - let's say you have a ton of tempaltes written in `EJS` but you are trying to migrate to `handlebars`
 - let's say you started working with API gateway and they have a templating language requirement of ApacheCTL and you just refuse to learn a new template language - you can now transpile another template language to apacheVTL

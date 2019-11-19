@@ -1,0 +1,37 @@
+{
+  "name": "templateast",
+  "version": "0.1.0",
+  "description": "a unist compliant AST for templating languages",
+  "main": "index.js",
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/federalies/templateAST.git"
+  },
+  "keywords": [
+    "AST",
+    "templating",
+    "unist",
+    "syntax",
+    "tree"
+  ],
+  "author": "Eric D Moore",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/federalies/templateAST/issues"
+  },
+  "homepage": "https://github.com/federalies/templateAST#readme",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
