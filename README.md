@@ -1,6 +1,6 @@
 ![templast logo](./artwork/logo.svg)
 
-**T**emplate **A**bstract **S**yntax **T**ree (aka: templast )
+**Templ**ate **A**bstract **S**yntax **T**ree (aka: templast )
 > a unist compliant syntax tree spec for templating languages
 
 ## Why
@@ -71,16 +71,20 @@ the AST would need to support
 
 AST Proposal
 ---------------------
-`ROOT version=1`
-`COMMENT`
-`LITERAL`
-    `string`
-    ?? do we need anything else?
-    `number`
-    `array`
-    `object`
-    `boolean`
-`PARTIAL`
+
+- `ROOT` 
+    - version=1
+- `COMMENT`
+    - isMultiline: false
+    - isStructuredData: false
+- `LITERAL`
+    - `string`
+    - ?? do we really need anything else?
+    - `number`
+    - `array`
+    - `object`
+    - `boolean`
+- `PARTIAL`
     - `inlineDefinition`
         - name
         - content
@@ -89,27 +93,27 @@ AST Proposal
         - name
         - location
         - params passed in
-`EXPRESSION`
-    `BlockStatement` // hash lookup to be replaced with string
-        escapeHTML: false
-        booleanInversion: false
-        stripWhiteSpace: false
-        noNewLine: false
-    `SubExpression` // is it needed, given children nodes?
-    `MustacheStatement` // hash.lookup with children conditionally availalbe 
-    `StateDeclaration` // ApacheVTL - - to a pure data in template - Warn that some data 'defaults' may be lost
-    `ContextLookup` // Blcok Expression
-    `Macro-Helper Block`
+- `EXPRESSION`
+    - `BlockStatement` // hash lookup to be replaced with string
+        - escapeHTML: false
+        - booleanInversion: false
+        - stripWhiteSpace: false
+        - noNewLine: false
+     - `SubExpression` // is it needed, given children nodes?
+     - `MustacheStatement` // hash.lookup with children conditionally availalbe 
+     - `StateDeclaration` // ApacheVTL - - to a pure data in template - Warn that some data 'defaults' may be lost
+     - `ContextLookup` // Blcok Expression
+     - `Macro-Helper Block`
         doT + VTL + handlebars + EJS
         EJS Examples: 
         ```<% const someFunc = ()=>{} %>```
         ```<% const|let|var someFunc = function(){} %>```
-    `childrenContext`
+    - `childrenContext`
         List = DATA[]
         INDEX = interger
-    `SetContext`
-    `ExitContext`
-    `ConditionalContext`
+    - `SetContext`
+    - `ExitContext`
+    - `ConditionalContext`
 
 ### Handlebar Exmaple
 + hash lookups
@@ -131,11 +135,10 @@ other than the partial is often requiring a template fetch.
 ## SCRATCH PAD
 
 parserconfig for every `*-parse` 
-
-configDelimiters  =null = `auto`/default
 expandPartials = true
 partialsProvided = {}
-resovlePartialFunction = ()=>{}
+partialsResolverFunction = ()=>{}
+configDelimiters  =null = `auto`/default
 
         handlebars.parse( string ): AST
         hbs.AST.MustacheStatement 
