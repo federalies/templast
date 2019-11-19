@@ -115,6 +115,188 @@ AST Proposal
     - `ExitContext`
     - `ConditionalContext`
 
+To give some assurances that this AST works well, it should be demonstrated that many template languages fit into the paradigm.
+
+#### Handlebars Support
+- __[templast-hbs-parse](#)__
+  parse handlebars templates into `templast`
+- __[templast-hbs-verify](#)__
+  verify that the existing `templasTree` could be rendered to handlebars without issue
+- __[templast-hbs-stringify](#)__
+  render the tree to a handlebars template
+
+#### mustache Support
+- __[templast-mustache-parse](#)__
+- __[templast-mustache-verify](#)__
+  assigns `warnings` or `failures` to the template if the source file was from some other template system and is now going to be rendered as a mustache file.
+- __[templast-mustache-stringify](#)__
+
+### doT Support
+- __[templast-doT-parse](#)__
+  incorporate doT templates into `templast`
+- __[templast-doT-verify](#)__
+  incorporate doT templates into `templast`
+- __[templast-doT-stringify](#)__
+  incorporate doT templates into `templast`
+
+#### apacheVTL Support
+- __[templast-apacheVTL-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-apacheVTL-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-apacheVTL-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+### js Tempalte Literals
+- __[templast-jsTemplateLiterals-parse](#)__
+  incorporate jsTemplateLiterals into `templast`
+- __[templast-verify-jsTemplateLiterals](#)__
+  incorporate jsTemplateLiterals into `templast`
+- __[templast-jsTemplateLiterals-stringify](#)__
+  incorporate js Template Literals into `templast` where they are rendered like: 
+  
+  ```js
+  const t = (data)=>`some text ${data.attr} with more static content`
+  ```
+
+
+#### EJS Support
+- __[templast-ejs-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+#### EJS Support
+- __[templast-ejs-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+
+#### JADE Support
+- __[templast-ejs-parse](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-verify](#)__
+  incorporate apacheVTL templates into `templast`
+- __[templast-ejs-stringify](#)__
+  incorporate apacheVTL templates into `templast`
+
+#### virtual DOM support
+- attempt to render a templast into a mixture of `hast` nodes and `templast` nodes such that you might be able to represent a template as:
+- this would let you compose your template in handlebars,etc, and then transpile your tempalte to a virtual dom function via an ℎ ƒunction.
+- configure the `virtual-dom-strigify` with the fucntion token to use: _default is 'h'_ but could easily be `preact.h` or `React.createElement`
+
+```mjs
+/** @jsx Preact.h */
+import attrs from 'myCSSinJSfile.js'
+const t = (data) => h('div',attrs.div, [
+                        h('div', attrs.div, [
+                            h('h3', attrs.h3, data.title )
+                        ]), 
+                        h('form', attrs.form, 
+                        h('input','button',data.buttonText)
+                    ])
+```
+
+## Roadmap
+
+- help needed for a `virtual DOM` _`parse`_ and _`stringify`_
+- help needed for creating some type-system guarentees
+- help needed for `jade`
+- help needed for `pug`
+- help needed for approaching a subset of `EJS`
+- help needed for approaching a subset of `ERB`
+- explore supporting some `PHP.twig` templates
+
+### Usage
+
+`npm start` will download a ton of other git repos into the packages folder. 
+Where each of the packages have their own repo and lifecycle.
+
+Then use the `npx meta` command to manage all those sub-repos in some type of `lerna-overlord-style`
+
+### PIPEDREAMS
+
+- to-and-fro-Apache-Velocity-Templates
+  - Parse VTL to unist
+  - Parse mustache to unist
+  - Parse mustache to unist
+  - VTL to mustache ?? https://mustache.github.io/mustache.5.html?
+    + hash lookups
+    + hash context windows - and subsequent attribute lookups
+    + comments
+    + partials
+  - VTL to handlebars
+    + hash lookups
+    + hash context windows - and subsequent attribute lookups
+    + HTML escaping
+    + block expressions
+    + consider it a foreach
+        + Sets context to a list and allows attributes to be read for each item
+    + nested attr.path
+    + context stack can be traversed upward
+    + comments
+    + helpers can be registered
+        + built in `#with` and `#each`
+    + partials
+  - TemplateAST
+    - Mustache
+    - Handlebars
+    - Apache VTL
+    - JS Template Strings
+    - doT
+    - EJS
+    - Pug
+    - Marko?
+    - Jade
+  - VTL to MDX?
+  - mustache to VTL
+  - handlebars to VTL
+
+- Babel7Ast-to-mdxast
+
+  - ref: https://github.com/babel/babel/blob/master/packages/babel-parser/ast/spec.md
+
+- TSast-to-mdxast
+
+- MDXAST
+
+    - MDAST + 
+
+    - JSX -> script
+
+    - COMMENT
+
+    - Import
+
+    - Export
+
+- MDXHAST
+
+    - HAST +
+        type: element
+        tagName: div, span, form, input, 
+        properties: {}
+        children:[]
+        ƒ h(tagType, {props}, [ children ] )
+
+    - imports
+
+    - exports
+
+    - inlineCode
+
+means that an .mdx file is really a fancy JS file 
+a certain type of JS file that has some convention allowing it to be rendered when invoked with proper context 
+
+
+
+
+
 ### Handlebar Exmaple
 + hash lookups
 + hash context windows (aka: set context path) - and subsequent attribute lookups
